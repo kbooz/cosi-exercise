@@ -47,6 +47,7 @@ function SearchFlight({ onSubmitSearch, disabled }: SearchFlightProps) {
 								type="text"
 								label="Flight #"
 								fullWidth
+								required
 								inputProps={{
 									"data-testid": "flightNumber",
 								}}
@@ -62,6 +63,7 @@ function SearchFlight({ onSubmitSearch, disabled }: SearchFlightProps) {
 								type="text"
 								label="Last Name"
 								fullWidth
+								required
 								inputProps={{
 									"data-testid": "lastName",
 								}}
