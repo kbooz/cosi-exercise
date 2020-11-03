@@ -1,16 +1,8 @@
 import * as React from "react";
 
-import {
-	Container,
-	AppBar,
-	Toolbar,
-	Typography,
-	Box,
-	CircularProgress,
-} from "@material-ui/core";
-
 import { useMutation } from "react-query";
 
+import MainTemplate from "./components/templates/MainTemplate";
 import SearchFlight from "./routes/SearchFlight/SearchFlight";
 import UserInfo from "./routes/UserInfo/UserInfo";
 import Success from "./routes/Success/Success";
@@ -40,46 +32,22 @@ function App() {
 	);
 
 	return (
-		<>
-			<AppBar position="static">
-				<Toolbar>
-					<Typography variant="h6">COSI</Typography>
-				</Toolbar>
-			</AppBar>
-			<Container
-				style={{
-					paddingTop: "1.5rem",
-				}}
-			>
-				{state === "search" && (
-					<>
-						<SearchFlight
-							onSubmitSearch={onSearch}
-							disabled={isLoadingSearch}
-						/>
-
-						{isLoadingSearch && (
-							<Box mt={5} display="flex" alignItems="center">
-								<CircularProgress inlist />
-								<Box ml={3}>
-									<Typography>
-										Trying to find your flight!
-									</Typography>
-								</Box>
-							</Box>
-						)}
-					</>
-				)}
-				{state === "edit" && data?.data && (
-					<UserInfo
-						user={data.data}
-						onSubmitConfimation={onConfirm}
-						disabled={isLoadingConfirm}
-					/>
-				)}
-				{state === "success" && <Success />}
-			</Container>
-		</>
+		<MainTemplate>
+			{state === "search" && (
+				<SearchFlight
+					onSubmitSearch={onSearch}
+					isLoading={isLoadingSearch}
+				/>
+			)}
+			{state === "edit" && data?.data && (
+				<UserInfo
+					user={data.data}
+					onSubmitConfimation={onConfirm}
+					disabled={isLoadingConfirm}
+				/>
+			)}
+			{state === "success" && <Success />}
+		</MainTemplate>
 	);
 }
 
