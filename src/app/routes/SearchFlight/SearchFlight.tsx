@@ -27,7 +27,6 @@ function SearchFlight({ onSubmitSearch, disabled }: SearchFlightProps) {
 		},
 		validationSchema: schema,
 		onSubmit(submitValues) {
-			console.log(submitValues);
 			onSubmitSearch?.(submitValues);
 		},
 	});

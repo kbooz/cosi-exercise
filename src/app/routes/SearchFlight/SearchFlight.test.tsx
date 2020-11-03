@@ -11,7 +11,7 @@ describe("Search Flight form", () => {
 		expect(lastNameInput).toBeInTheDocument();
 	});
 
-	it.only("should execute search when all fields are correct", async () => {
+	it("should execute search when all fields are correct", async () => {
 		const mockSearch = jest.fn();
 		render(<SearchFlight onSubmitSearch={mockSearch} />);
 		const flightInput = await screen.findByTestId(/flight/);
@@ -21,8 +21,6 @@ describe("Search Flight form", () => {
 		await fireEvent.change(flightInput, { target: { value: 1235 } });
 		await fireEvent.change(lastNameInput, { target: { value: "jose" } });
 		await fireEvent.click(submitButton);
-
-		console.log(screen.debug());
 
 		expect(mockSearch).toBeCalled();
 	});
