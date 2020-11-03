@@ -1,11 +1,31 @@
 import * as React from "react";
-import { Box, Typography } from "@material-ui/core";
+import { Box, Typography, Button, Grid } from "@material-ui/core";
 
-function Success() {
+interface SuccessProps {
+	onReset: () => void;
+}
+
+function Success({ onReset }: SuccessProps) {
 	return (
-		<Box>
-			<Typography variant="h3">Your check-in is confirmed!</Typography>
-		</Box>
+		<Grid direction="column">
+			<Grid item xs={12}>
+				<Typography variant="h4">
+					Your check-in is confirmed!
+				</Typography>
+			</Grid>
+			<Grid item xs={12} md={3}>
+				<Box pt={4}>
+					<Button
+						onClick={onReset}
+						variant="contained"
+						color="primary"
+						fullWidth
+					>
+						Reset
+					</Button>
+				</Box>
+			</Grid>
+		</Grid>
 	);
 }
 

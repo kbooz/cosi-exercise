@@ -9,6 +9,8 @@ import {
 	FormControlLabel,
 	Checkbox,
 	Select,
+	CircularProgress,
+	Box,
 } from "@material-ui/core";
 import { useFormik } from "formik";
 
@@ -19,10 +21,10 @@ import UserInfoExtra from "./UserInfo.extra";
 interface UserInfoProps {
 	user: FlightResponse;
 	onSubmitConfimation?: (data: any) => void;
-	disabled?: boolean;
+	isLoading?: boolean;
 }
 
-function UserInfo({ user, onSubmitConfimation, disabled }: UserInfoProps) {
+function UserInfo({ user, onSubmitConfimation, isLoading }: UserInfoProps) {
 	const [isConfirming, setIsConfiming] = React.useState(false);
 	const { values, errors, handleChange, handleSubmit } = useFormik({
 		initialValues: {
@@ -220,30 +222,44 @@ function UserInfo({ user, onSubmitConfimation, disabled }: UserInfoProps) {
 								/>
 							</Grid>
 						)}
-						{isConfirming && (
-							<Grid item xs={12}>
-								<Button
-									color="secondary"
-									variant="contained"
-									type="button"
-									data-testid="edit"
-									disabled={disabled}
-									onClick={goEdit}
-								>
-									Edit
-								</Button>
-							</Grid>
-						)}
 						<Grid item xs={12}>
-							<Button
-								color="primary"
-								variant="contained"
-								type="submit"
-								data-testid="submit"
-								disabled={disabled && !values.terms}
-							>
-								Continue
-							</Button>
+							<Box pt={2}>
+								<Grid container spacing={2}>
+									{isConfirming && (
+										<Grid item xs={12} md={2}>
+											<Button
+												fullWidth
+												color="secondary"
+												variant="contained"
+												type="button"
+												data-testid="edit"
+												disabled={isLoading}
+												onClick={goEdit}
+											>
+												Edit
+											</Button>
+										</Grid>
+									)}
+									<Grid item xs={12} md={2}>
+										<Button
+											fullWidth
+											color="primary"
+											variant="contained"
+											type="submit"
+											data-testid="submit"
+											disabled={
+												isLoading || !values.terms
+											}
+										>
+											{isLoading ? (
+												<CircularProgress size={24} />
+											) : (
+												"Continue"
+											)}
+										</Button>
+									</Grid>
+								</Grid>
+							</Box>
 						</Grid>
 					</Grid>
 				</form>

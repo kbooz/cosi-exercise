@@ -31,6 +31,8 @@ function App() {
 		}
 	);
 
+	const onReset = React.useCallback(() => setState("search"), []);
+
 	return (
 		<MainTemplate>
 			{state === "search" && (
@@ -43,10 +45,10 @@ function App() {
 				<UserInfo
 					user={data.data}
 					onSubmitConfimation={onConfirm}
-					disabled={isLoadingConfirm}
+					isLoading={isLoadingConfirm}
 				/>
 			)}
-			{state === "success" && <Success />}
+			{state === "success" && <Success onReset={onReset} />}
 		</MainTemplate>
 	);
 }

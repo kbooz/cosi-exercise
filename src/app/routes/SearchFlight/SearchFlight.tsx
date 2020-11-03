@@ -5,6 +5,7 @@ import {
 	Button,
 	Grid,
 	CircularProgress,
+	Box,
 } from "@material-ui/core";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -17,8 +18,11 @@ interface SearchFlightProps {
 }
 
 const schema = Yup.object({
-	flight: Yup.string().required("Fill your flight number"),
+	flight: Yup.string()
+		.length(6, "Must have only 6 characters")
+		.required("Fill your flight number"),
 	lastName: Yup.string()
+		.min(3, "Minimun")
 		.max(20, "Must be 20 characters or less")
 		.required("Fill your last name"),
 });
@@ -37,38 +41,45 @@ function SearchFlight({ onSubmitSearch, isLoading }: SearchFlightProps) {
 		},
 	});
 	return (
-		<Grid container spacing={4}>
+		<Grid container spacing={4} direction="column">
 			<Grid item xs={12}>
-				<Typography variant="h3">
+				<Typography variant="h4">
 					Welcome to your web check-in
 				</Typography>
 			</Grid>
 			<Grid item xs={12}>
 				<form onSubmit={handleSubmit}>
-					<Grid container spacing={3}>
-						<Grid item xs={12}>
+					<Grid container spacing={3} direction="column">
+						<Grid item xs={12} md={4}>
 							<TextField
 								id="flight"
 								type="text"
 								label="Flight #"
+								placeholder="A3C1B3"
 								fullWidth
 								required
+								InputLabelProps={{
+									shrink: true,
+								}}
 								inputProps={{
 									"data-testid": "flightNumber",
 								}}
 								onChange={handleChange}
 								value={values.flight}
 								error={!!errors.flight}
-								helperText={errors.flight}
+								helperText={errors.flight ?? "ex.: A3C1B3"}
 							/>
 						</Grid>
-						<Grid item xs={12}>
+						<Grid item xs={12} md={4}>
 							<TextField
 								id="lastName"
 								type="text"
 								label="Last Name"
 								fullWidth
 								required
+								InputLabelProps={{
+									shrink: true,
+								}}
 								inputProps={{
 									"data-testid": "lastName",
 								}}
@@ -78,21 +89,23 @@ function SearchFlight({ onSubmitSearch, isLoading }: SearchFlightProps) {
 								helperText={errors.lastName}
 							/>
 						</Grid>
-						<Grid item xs={12} md={3}>
-							<Button
-								fullWidth
-								color="primary"
-								variant="contained"
-								type="submit"
-								data-testid="submit"
-								disabled={isLoading}
-							>
-								{isLoading ? (
-									<CircularProgress size={16} />
-								) : (
-									"Search Flight"
-								)}
-							</Button>
+						<Grid item xs={12} md={2}>
+							<Box pt={2}>
+								<Button
+									fullWidth
+									color="primary"
+									variant="contained"
+									type="submit"
+									data-testid="submit"
+									disabled={isLoading}
+								>
+									{isLoading ? (
+										<CircularProgress size={18} />
+									) : (
+										"Search Flight"
+									)}
+								</Button>
+							</Box>
 						</Grid>
 					</Grid>
 				</form>
