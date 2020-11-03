@@ -245,4 +245,65 @@ export const countries = [
 	{ name: 'Zimbabwe', code: 'ZW' }
 ]
 
-// export const
+export interface ExtraInfo {
+	residence?: {
+		country?: boolean;
+		city?: boolean;
+		address?: boolean;
+	}
+	passport?: {
+		locationIssue?: boolean;
+		dateIssue?: boolean;
+		expirity?: boolean;
+	}
+	birthDate?: boolean;
+	birthPlace?: boolean;
+}
+
+export function renderExtraInfo(code: string): ExtraInfo {
+	switch (code) {
+		case "AT":
+			return {
+				residence: {
+					country: true,
+					city: true
+				},
+				passport: {
+					expirity: true
+				}
+			}
+		case "BE":
+			return {
+				birthDate: true,
+				residence: {
+					country: true,
+					city: true,
+					address: true
+				}
+			}
+		case "FR":
+			return {
+				birthDate: true,
+				birthPlace: true,
+				residence: {
+					country: true,
+					city: true,
+				}
+			};
+		case "GR":
+			return {
+				passport: {
+					dateIssue: true,
+					locationIssue: true,
+					expirity: true,
+				}
+			}
+		case "ES":
+			return {
+				residence: {
+					address: true,
+				}
+			}
+		default: return {};
+	}
+}

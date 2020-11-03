@@ -13,7 +13,8 @@ import {
 import { useFormik } from "formik";
 
 import { FlightResponse } from "../../types/Flight";
-import { countries } from "./UserInfo.data";
+import { countries, renderExtraInfo } from "./UserInfo.data";
+import UserInfoExtra from "./UserInfo.extra";
 
 interface UserInfoProps {
 	user: FlightResponse;
@@ -32,6 +33,14 @@ function UserInfo({ user, onSubmitConfimation, disabled }: UserInfoProps) {
 			email: "",
 			phone: "",
 			passport: "",
+			residenceAddress: "",
+			residenceCity: "",
+			residenceCountry: "",
+			birthDate: "",
+			birthPlace: "",
+			passportDateIssue: "",
+			passportLocationIssue: "",
+			passportExpirity: "",
 		},
 		onSubmit(submitValues) {
 			if (!isConfirming) {
@@ -43,6 +52,10 @@ function UserInfo({ user, onSubmitConfimation, disabled }: UserInfoProps) {
 	});
 
 	const goEdit = React.useCallback(() => setIsConfiming(false), []);
+
+	const extraInfo = React.useMemo(() => renderExtraInfo(values.nationality), [
+		values.nationality,
+	]);
 
 	return (
 		<Grid container spacing={4}>
@@ -123,6 +136,13 @@ function UserInfo({ user, onSubmitConfimation, disabled }: UserInfoProps) {
 								</Select>
 							</FormControl>
 						</Grid>
+						<UserInfoExtra
+							errors={errors}
+							extraInfo={extraInfo}
+							handleChange={handleChange}
+							isConfirming={isConfirming}
+							values={values}
+						/>
 						<Grid item xs={12} md={6}>
 							<TextField
 								id="email"
