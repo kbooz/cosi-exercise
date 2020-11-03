@@ -1,5 +1,11 @@
 import * as React from "react";
-import { TextField, Typography, Button, Grid } from "@material-ui/core";
+import {
+	TextField,
+	Typography,
+	Button,
+	Grid,
+	CircularProgress,
+} from "@material-ui/core";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -7,7 +13,7 @@ import { FlightQuery } from "../../types/Flight";
 
 interface SearchFlightProps {
 	onSubmitSearch?: (data: FlightQuery) => void;
-	disabled?: boolean;
+	isLoading?: boolean;
 }
 
 const schema = Yup.object({
@@ -17,7 +23,7 @@ const schema = Yup.object({
 		.required("Fill your last name"),
 });
 
-function SearchFlight({ onSubmitSearch, disabled }: SearchFlightProps) {
+function SearchFlight({ onSubmitSearch, isLoading }: SearchFlightProps) {
 	const { values, errors, handleChange, handleSubmit } = useFormik<
 		FlightQuery
 	>({
@@ -72,15 +78,20 @@ function SearchFlight({ onSubmitSearch, disabled }: SearchFlightProps) {
 								helperText={errors.lastName}
 							/>
 						</Grid>
-						<Grid item xs={12}>
+						<Grid item xs={12} md={3}>
 							<Button
+								fullWidth
 								color="primary"
 								variant="contained"
 								type="submit"
 								data-testid="submit"
-								disabled={disabled}
+								disabled={isLoading}
 							>
-								Search Flight
+								{isLoading ? (
+									<CircularProgress size={16} />
+								) : (
+									"Search Flight"
+								)}
 							</Button>
 						</Grid>
 					</Grid>
