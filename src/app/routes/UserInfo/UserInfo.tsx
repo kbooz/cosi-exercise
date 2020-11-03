@@ -106,7 +106,7 @@ function UserInfo({ user, onSubmitConfimation, disabled }: UserInfoProps) {
 							/>
 						</Grid>
 						<Grid item xs={12} md={6}>
-							<FormControl fullWidth>
+							<FormControl fullWidth required>
 								<InputLabel htmlFor="nationality">
 									Nationality
 								</InputLabel>
