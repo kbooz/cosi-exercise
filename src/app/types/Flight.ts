@@ -4,6 +4,7 @@ export interface FlightQuery {
 }
 
 export interface FlightResponse {
+	flight: string;
 	firstName: string;
 	lastName: string;
 }

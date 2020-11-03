@@ -60,6 +60,9 @@ function UserInfo({ user, onSubmitConfimation, disabled }: UserInfoProps) {
 	return (
 		<Grid container spacing={4}>
 			<Grid item xs={12}>
+				<Typography variant="h6">
+					Flight #{user.flight.toUpperCase()}
+				</Typography>
 				<Typography variant="body1">
 					{isConfirming
 						? "Please review your information"
