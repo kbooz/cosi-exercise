@@ -4,12 +4,16 @@ import {
 	Typography,
 	Button,
 	Grid,
+	FormControl,
+	InputLabel,
 	FormControlLabel,
 	Checkbox,
+	Select,
 } from "@material-ui/core";
 import { useFormik } from "formik";
 
 import { FlightResponse } from "../../types/Flight";
+import { countries } from "./UserInfo.data";
 
 interface UserInfoProps {
 	user: FlightResponse;
@@ -24,6 +28,7 @@ function UserInfo({ user, onSubmitConfimation, disabled }: UserInfoProps) {
 			firstName: user.firstName,
 			lastName: user.lastName,
 			terms: false,
+			nationality: "",
 			email: "",
 			phone: "",
 			passport: "",
@@ -86,6 +91,37 @@ function UserInfo({ user, onSubmitConfimation, disabled }: UserInfoProps) {
 								helperText={errors.lastName}
 								required
 							/>
+						</Grid>
+						<Grid item xs={12} md={6}>
+							<FormControl fullWidth>
+								<InputLabel htmlFor="nationality">
+									Nationality
+								</InputLabel>
+								<Select
+									native
+									value={values.nationality}
+									label="Nationality"
+									onChange={
+										!isConfirming ? handleChange : undefined
+									}
+									inputProps={{
+										"data-testid": "nationality",
+										id: "nationality",
+									}}
+									error={!!errors.nationality}
+									required
+								>
+									<option aria-label="None" value="" />
+									{countries.map((country) => (
+										<option
+											value={country.code}
+											key={country.code}
+										>
+											{country.name}
+										</option>
+									))}
+								</Select>
+							</FormControl>
 						</Grid>
 						<Grid item xs={12} md={6}>
 							<TextField
