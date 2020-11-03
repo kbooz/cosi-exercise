@@ -1,5 +1,5 @@
 export interface FlightQuery {
-	flight: number;
+	flight: string;
 	lastName: string;
 }
 

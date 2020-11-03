@@ -11,7 +11,7 @@ interface SearchFlightProps {
 }
 
 const schema = Yup.object({
-	flight: Yup.number().required("Fill your flight number"),
+	flight: Yup.string().required("Fill your flight number"),
 	lastName: Yup.string()
 		.max(20, "Must be 20 characters or less")
 		.required("Fill your last name"),
@@ -22,7 +22,7 @@ function SearchFlight({ onSubmitSearch, disabled }: SearchFlightProps) {
 		FlightQuery
 	>({
 		initialValues: {
-			flight: 0,
+			flight: "",
 			lastName: "",
 		},
 		validationSchema: schema,
@@ -44,7 +44,7 @@ function SearchFlight({ onSubmitSearch, disabled }: SearchFlightProps) {
 						<Grid item xs={12}>
 							<TextField
 								id="flight"
-								type="number"
+								type="text"
 								label="Flight #"
 								fullWidth
 								inputProps={{
