@@ -5,7 +5,7 @@ import { ApiService, SecondaryApiService } from "./api";
 const FlightService = {
 	search(searchData: FlightQuery) {
 		return ApiService.post<FlightResponse>("/pb22iDJa", {
-			token: "Xj_mhZw1lLmC9mlbs59wHA",
+			token: process.env.REACT_APP_TOKEN,
 			data: searchData,
 		});
 	},

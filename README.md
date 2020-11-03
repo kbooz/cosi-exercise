@@ -2,6 +2,16 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) for the [Frontend Engineer exercise from COSI](https://github.com/COSI-Group/jobs/tree/main/frontend).
 
+## Configuration
+
+First of all, create a `.env` file in the root of the project with the following structure:
+
+```sh
+REACT_APP_TOKEN=TOKEN
+```
+
+The token will be sent to the recruiter's email
+
 ## Available Scripts
 
 In the project directory, you can run:
