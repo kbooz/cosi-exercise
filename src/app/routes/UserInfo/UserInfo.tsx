@@ -62,7 +62,7 @@ function UserInfo({ user, onSubmitConfimation, isLoading }: UserInfoProps) {
 	return (
 		<Grid container spacing={4}>
 			<Grid item xs={12}>
-				<Typography variant="h6">
+				<Typography variant="h6" data-testid="flight">
 					Flight #{user.flight.toUpperCase()}
 				</Typography>
 				<Typography variant="body1" data-testid="message">
@@ -113,7 +113,7 @@ function UserInfo({ user, onSubmitConfimation, isLoading }: UserInfoProps) {
 						<Grid item xs={12} md={6}>
 							<FormControl fullWidth required>
 								<InputLabel htmlFor="nationality">
-									Nationality {values.nationality}
+									Nationality
 								</InputLabel>
 								<Select
 									native

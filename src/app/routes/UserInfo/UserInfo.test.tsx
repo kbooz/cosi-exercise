@@ -58,19 +58,24 @@ describe("User Info form", () => {
 
 	it("should enter confirm mode and submit", async () => {
 		const onSubmit = jest.fn();
-
 		render(<UserInfo user={user} onSubmitConfimation={onSubmit} />);
 
+		const userInfo = {
+			email: "lucas@test.com",
+			phone: "+55219999999",
+			passport: "ABCDEF",
+		};
+
 		fireEvent.change(screen.getByTestId("email"), {
-			target: { value: "lucas@test.com" },
+			target: { value: userInfo.email },
 		});
 		fireEvent.change(screen.getByTestId("phone"), {
 			target: {
-				value: "+55219999999",
+				value: userInfo.phone,
 			},
 		});
 		fireEvent.change(screen.getByTestId("passport"), {
-			target: { value: "ABCDEF" },
+			target: { value: userInfo.passport },
 		});
 
 		const nationality = screen.getByTestId("nationality");
