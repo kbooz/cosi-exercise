@@ -7,7 +7,7 @@ interface SuccessProps {
 
 function Success({ onReset }: SuccessProps) {
 	return (
-		<Grid direction="column">
+		<Grid container direction="column">
 			<Grid item xs={12}>
 				<Typography variant="h4">
 					Your check-in is confirmed!
@@ -20,6 +20,7 @@ function Success({ onReset }: SuccessProps) {
 						variant="contained"
 						color="primary"
 						fullWidth
+						data-testid="reset"
 					>
 						Reset
 					</Button>

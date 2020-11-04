@@ -1,7 +1,10 @@
 import axios from "axios";
 
+export const apiUrl = "https://app.fakejson.com/q";
+export const secondaryApiUrl = "https://api.mocki.io/v1"
+
 export const ApiService = axios.create({
-	baseURL: "https://app.fakejson.com/q",
+	baseURL: apiUrl,
 	headers: {
 		Accept: "application/json",
 		"Content-Type": "application/json",
@@ -9,7 +12,7 @@ export const ApiService = axios.create({
 });
 
 export const SecondaryApiService = axios.create({
-	baseURL: "https://api.mocki.io/v1",
+	baseURL: secondaryApiUrl,
 	headers: {
 		Accept: "application/json",
 		"Content-Type": "application/json",

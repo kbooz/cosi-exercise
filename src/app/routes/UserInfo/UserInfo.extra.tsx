@@ -20,7 +20,7 @@ function UserInfoExtra({
 	return (
 		<>
 			{extraInfo?.residence && (
-				<Grid item xs={12} spacing={4}>
+				<Grid item xs={12}>
 					<Box paddingTop={1}>
 						<Box paddingBottom={1.5}>
 							<Typography variant="body2">Residence</Typography>
@@ -194,7 +194,7 @@ function UserInfoExtra({
 								</Grid>
 							)}
 							{extraInfo.passport?.expirity && (
-								<Grid item xs={12} md={6} spacing={4}>
+								<Grid item xs={12} md={6}>
 									<TextField
 										id="passportExpirity"
 										type="date"
