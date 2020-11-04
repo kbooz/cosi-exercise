@@ -1,16 +1,20 @@
+import axios from "axios";
 import { FlightQuery, FlightResponse } from "../types/Flight";
-import { ApiService, SecondaryApiService } from "./api";
 
+export const flightUrls = {
+	search: "https://app.fakejson.com/q/pb22iDJa",
+	confirm: "https://api.mocki.io/v1/7ec46dac"
+}
 
 const FlightService = {
 	search(searchData: FlightQuery) {
-		return ApiService.post<FlightResponse>("/pb22iDJa", {
+		return axios.post<FlightResponse>(flightUrls.search, {
 			token: process.env.REACT_APP_TOKEN,
 			data: searchData,
 		});
 	},
 	confirm(data: any) {
-		return SecondaryApiService.post("/7ec46dac", data)
+		return axios.post(flightUrls.confirm, data)
 	}
 }
 
