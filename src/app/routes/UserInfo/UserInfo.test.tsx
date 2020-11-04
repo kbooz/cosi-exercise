@@ -1,55 +1,142 @@
-import { renderExtraInfo } from "./UserInfo.data";
+import * as React from "react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import UserInfo from "./UserInfo";
 
-describe("User Info utils", () => {
-	it("should return Austria extra rules", () => {
-		expect(renderExtraInfo("AT")).toStrictEqual({
-			residence: {
-				country: true,
-				city: true,
-			},
-			passport: {
-				expirity: true,
-			},
-		});
+const user = {
+	flight: "FLIGHT",
+	lastName: "de Souza",
+	firstName: "Lucas",
+};
+
+const changeNationalitySelect = (nationality: string) => {
+	fireEvent.change(screen.getByTestId("nationality"), {
+		target: { value: nationality },
 	});
-	it("should return Belgium extra rules", () => {
-		expect(renderExtraInfo("BE")).toStrictEqual({
-			birthDate: true,
-			residence: {
-				country: true,
-				city: true,
-				address: true,
-			},
-		});
+};
+
+const validateMultipleFields = (fields: string[]) => {
+	fields.forEach((field) => {
+		expect(screen.getByTestId(field)).toBeTruthy();
 	});
-	it("should return France extra rules", () => {
-		expect(renderExtraInfo("FR")).toStrictEqual({
-			birthDate: true,
-			birthPlace: true,
-			residence: {
-				country: true,
-				city: true,
-			},
-		});
-	});
-	it("should return Greece extra rules", () => {
-		expect(renderExtraInfo("GR")).toStrictEqual({
-			passport: {
-				dateIssue: true,
-				locationIssue: true,
-				expirity: true,
-			},
-		});
-	});
-	it("should return Spain extra rules", () => {
-		expect(renderExtraInfo("ES")).toStrictEqual({
-			residence: {
-				address: true,
-			},
-		});
+};
+
+describe("User Info form", () => {
+	it("should render", () => {
+		const user = {
+			flight: "FLIGHT",
+			lastName: "de Souza",
+			firstName: "Lucas",
+		};
+		render(<UserInfo user={user} />);
+		expect(screen.getByText(/\#FLIGHT/)).toBeTruthy();
+		expect(screen.getByTestId("lastName")).toHaveValue(user.lastName);
+		expect(screen.getByTestId("firstName")).toHaveValue(user.firstName);
 	});
 
-	it("should return no extra rules", () => {
-		expect(renderExtraInfo("CE")).toStrictEqual({});
+	it("should fail validation and disable confimation", async () => {
+		const user = {
+			flight: "FLIGHT",
+			lastName: "de Souza",
+			firstName: "Lucas",
+		};
+		render(<UserInfo user={user} />);
+
+		const fieldData = { target: { value: "Test" } };
+		fireEvent.change(screen.getByTestId("phone"), fieldData);
+		fireEvent.change(screen.getByTestId("passport"), fieldData);
+
+		fireEvent.click(screen.getByTestId("submit"));
+
+		await waitFor(() => fireEvent.click(screen.getByTestId("submit")));
+
+		await waitFor(() =>
+			expect(screen.getByTestId("message")).toHaveTextContent(
+				user.lastName
+			)
+		);
+	});
+
+	it("should enter confirm mode and submit", async () => {
+		const onSubmit = jest.fn();
+
+		render(<UserInfo user={user} onSubmitConfimation={onSubmit} />);
+
+		fireEvent.change(screen.getByTestId("email"), {
+			target: { value: "lucas@test.com" },
+		});
+		fireEvent.change(screen.getByTestId("phone"), {
+			target: {
+				value: "+55219999999",
+			},
+		});
+		fireEvent.change(screen.getByTestId("passport"), {
+			target: { value: "ABCDEF" },
+		});
+
+		const nationality = screen.getByTestId("nationality");
+		const nationalityOptions = screen.getAllByTestId("nationality-option");
+
+		fireEvent.change(nationality, {
+			target: { value: nationalityOptions[0].getAttribute("value") },
+		});
+
+		fireEvent.click(screen.getByTestId("terms"));
+
+		await waitFor(() => fireEvent.click(screen.getByTestId("submit")));
+
+		await waitFor(() =>
+			expect(screen.getByTestId("message")).toHaveTextContent("review")
+		);
+
+		await waitFor(() => fireEvent.click(screen.getByTestId("submit")));
+
+		await waitFor(() => expect(onSubmit).toBeCalled());
+	});
+
+	it("should display Austria extra fields", async () => {
+		render(<UserInfo user={user} />);
+		changeNationalitySelect("AT");
+		validateMultipleFields([
+			"residenceCountry",
+			"residenceCity",
+			"passportExpirity",
+		]);
+	});
+	it("should display Belgium extra fields", async () => {
+		render(<UserInfo user={user} />);
+		changeNationalitySelect("BE");
+		validateMultipleFields([
+			"birthDate",
+			"residenceCountry",
+			"residenceCity",
+			"residenceAddress",
+		]);
+	});
+	it("should display France extra fields", async () => {
+		render(<UserInfo user={user} />);
+
+		changeNationalitySelect("FR");
+		validateMultipleFields([
+			"birthDate",
+			"birthPlace",
+			"residenceCountry",
+			"residenceCity",
+		]);
+	});
+	it("should display Greece extra fields", async () => {
+		render(<UserInfo user={user} />);
+
+		changeNationalitySelect("GR");
+		validateMultipleFields([
+			"passportDateIssue",
+			"passportLocationIssue",
+			"passportExpirity",
+		]);
+	});
+	it("should display Spain extra fields", async () => {
+		render(<UserInfo user={user} />);
+
+		changeNationalitySelect("ES");
+		validateMultipleFields(["residenceAddress"]);
 	});
 });

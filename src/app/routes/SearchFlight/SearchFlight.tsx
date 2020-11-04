@@ -36,6 +36,8 @@ function SearchFlight({ onSubmitSearch, isLoading }: SearchFlightProps) {
 			lastName: "",
 		},
 		validationSchema: schema,
+		validateOnChange: false,
+		validateOnBlur: false,
 		onSubmit(submitValues) {
 			onSubmitSearch?.(submitValues);
 		},
@@ -62,7 +64,8 @@ function SearchFlight({ onSubmitSearch, isLoading }: SearchFlightProps) {
 									shrink: true,
 								}}
 								inputProps={{
-									"data-testid": "flightNumber",
+									"data-testid": "flight",
+									maxLength: 6,
 								}}
 								onChange={handleChange}
 								value={values.flight}

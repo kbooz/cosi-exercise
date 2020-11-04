@@ -1,5 +1,5 @@
 import * as React from "react";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import SearchFlight from "./SearchFlight";
 
 describe("Search Flight form", () => {
@@ -13,15 +13,30 @@ describe("Search Flight form", () => {
 
 	it("should execute search when all fields are correct", async () => {
 		const mockSearch = jest.fn();
-		render(<SearchFlight onSubmitSearch={mockSearch} />);
-		const flightInput = await screen.findByTestId(/flight/);
-		const lastNameInput = await screen.findByTestId(/lastName/);
-		const submitButton = await screen.findByTestId(/submit/);
+		render(<SearchFlight onSubmitSearch={mockSearch} isLoading={false} />);
+		const flightInput = screen.getByTestId(/flight/);
+		const lastNameInput = screen.getByTestId(/lastName/);
+		const submitButton = screen.getByTestId(/submit/);
 
-		await fireEvent.change(flightInput, { target: { value: 1235 } });
-		await fireEvent.change(lastNameInput, { target: { value: "jose" } });
-		await fireEvent.click(submitButton);
+		fireEvent.change(flightInput, { target: { value: "ABC123" } });
 
-		expect(mockSearch).toBeCalled();
+		fireEvent.change(lastNameInput, { target: { value: "de Souza" } });
+
+		fireEvent.click(submitButton);
+
+		await waitFor(() => expect(mockSearch).toBeCalled());
+	});
+
+	it("should fail to execute search when fields are incorrect", async () => {
+		const mockSearch = jest.fn();
+		render(<SearchFlight onSubmitSearch={mockSearch} isLoading={false} />);
+		const flightInput = screen.getByTestId(/flight/);
+		const submitButton = screen.getByTestId(/submit/);
+
+		fireEvent.change(flightInput, { target: { value: "A" } });
+
+		fireEvent.click(submitButton);
+
+		await waitFor(() => expect(mockSearch).toBeCalledTimes(0));
 	});
 });

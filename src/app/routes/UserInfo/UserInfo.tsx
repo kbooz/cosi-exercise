@@ -26,7 +26,7 @@ interface UserInfoProps {
 
 function UserInfo({ user, onSubmitConfimation, isLoading }: UserInfoProps) {
 	const [isConfirming, setIsConfiming] = React.useState(false);
-	const { values, errors, handleChange, handleSubmit } = useFormik({
+	const { values, errors, handleChange, handleSubmit, isValid } = useFormik({
 		initialValues: {
 			firstName: user.firstName,
 			lastName: user.lastName,
@@ -65,14 +65,14 @@ function UserInfo({ user, onSubmitConfimation, isLoading }: UserInfoProps) {
 				<Typography variant="h6">
 					Flight #{user.flight.toUpperCase()}
 				</Typography>
-				<Typography variant="body1">
+				<Typography variant="body1" data-testid="message">
 					{isConfirming
 						? "Please review your information"
 						: `Hi, Mr/Ms. ${values.lastName}`}
 				</Typography>
 			</Grid>
 			<Grid item xs={12}>
-				<form onSubmit={handleSubmit}>
+				<form data-testid="form" onSubmit={handleSubmit}>
 					<Grid container spacing={3}>
 						<Grid item xs={12} md={6}>
 							<TextField
@@ -113,7 +113,7 @@ function UserInfo({ user, onSubmitConfimation, isLoading }: UserInfoProps) {
 						<Grid item xs={12} md={6}>
 							<FormControl fullWidth required>
 								<InputLabel htmlFor="nationality">
-									Nationality
+									Nationality {values.nationality}
 								</InputLabel>
 								<Select
 									native
@@ -122,9 +122,10 @@ function UserInfo({ user, onSubmitConfimation, isLoading }: UserInfoProps) {
 									onChange={
 										!isConfirming ? handleChange : undefined
 									}
+									id="nationality"
 									inputProps={{
 										"data-testid": "nationality",
-										id: "nationality",
+										value: values.nationality,
 									}}
 									error={!!errors.nationality}
 									required
@@ -134,6 +135,7 @@ function UserInfo({ user, onSubmitConfimation, isLoading }: UserInfoProps) {
 										<option
 											value={country.code}
 											key={country.code}
+											data-testid="nationality-option"
 										>
 											{country.name}
 										</option>
@@ -206,6 +208,7 @@ function UserInfo({ user, onSubmitConfimation, isLoading }: UserInfoProps) {
 							<Grid item xs={12}>
 								<FormControlLabel
 									style={{ width: "100%" }}
+									data-testid="terms"
 									control={
 										<Checkbox
 											checked={values.terms}
