@@ -9,7 +9,7 @@ function Success({ onReset }: SuccessProps) {
 	return (
 		<Grid container direction="column">
 			<Grid item xs={12}>
-				<Typography variant="h4">
+				<Typography variant="h4" data-testid="confirmation">
 					Your check-in is confirmed!
 				</Typography>
 			</Grid>

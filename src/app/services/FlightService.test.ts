@@ -7,7 +7,7 @@ const mock = new MockAdapter(axios);
 describe.only("Flight Service", () => {
 	it('searches successfully flight from API', async () => {
 		const requestData = { flight: "123Abc", lastName: "de Souza" };
-		const responseData = { data: requestData, token: process.env.REACT_APP_TOKEN };
+		const responseData = { data: { ...requestData, firstName: "Lucas" }, token: process.env.REACT_APP_TOKEN };
 
 		mock.onPost(flightUrls.search).reply(200, responseData);
 
