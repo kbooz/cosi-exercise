@@ -12,6 +12,20 @@ REACT_APP_TOKEN=TOKEN
 
 The token will be sent to the recruiter's email
 
+## Structure
+
+```
+src
+├── app
+│   ├── index.tsx
+│   ├── routes
+│   │   ├── SearchFlight
+│   │   ├── Success
+│   │   └── UserInfo
+│   ├── services				- API Services
+│   └── types					- General Typings
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
