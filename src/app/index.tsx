@@ -13,14 +13,14 @@ function App() {
 		"search"
 	);
 
-	const [onSearch, { isLoading: isLoadingSearch, data }] = useMutation(
-		FlightService.search,
-		{
-			onSuccess() {
-				setState("edit");
-			},
-		}
-	);
+	const [
+		onSearch,
+		{ isLoading: isLoadingSearch, data: searchData },
+	] = useMutation(FlightService.search, {
+		onSuccess() {
+			setState("edit");
+		},
+	});
 
 	const [onConfirm, { isLoading: isLoadingConfirm }] = useMutation(
 		FlightService.confirm,
@@ -41,9 +41,9 @@ function App() {
 					isLoading={isLoadingSearch}
 				/>
 			)}
-			{state === "edit" && data?.data && (
+			{state === "edit" && searchData?.data && (
 				<UserInfo
-					user={data.data}
+					user={searchData.data}
 					onSubmitConfimation={onConfirm}
 					isLoading={isLoadingConfirm}
 				/>

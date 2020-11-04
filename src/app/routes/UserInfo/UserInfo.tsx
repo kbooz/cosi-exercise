@@ -26,7 +26,7 @@ interface UserInfoProps {
 
 function UserInfo({ user, onSubmitConfimation, isLoading }: UserInfoProps) {
 	const [isConfirming, setIsConfiming] = React.useState(false);
-	const { values, errors, handleChange, handleSubmit, isValid } = useFormik({
+	const { values, errors, handleChange, handleSubmit } = useFormik({
 		initialValues: {
 			firstName: user.firstName,
 			lastName: user.lastName,
