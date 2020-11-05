@@ -92,7 +92,7 @@ function SearchFlight({ onSubmitSearch, isLoading }: SearchFlightProps) {
 								helperText={errors.lastName}
 							/>
 						</Grid>
-						<Grid item xs={12} md={2}>
+						<Grid item xs={12} md={3}>
 							<Box pt={2}>
 								<Button
 									fullWidth
