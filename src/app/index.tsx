@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import * as React from "react";
 import { useMutation } from "react-query";
+import Snackbar from "@material-ui/core/Snackbar";
+import Alert from "@material-ui/lab/Alert";
 
 import MainTemplate from "./components/templates/MainTemplate";
 import SearchFlight from "./routes/SearchFlight/SearchFlight";
@@ -9,10 +11,12 @@ import UserInfo from "./routes/UserInfo/UserInfo";
 import FlightService from "./services/FlightService";
 import { FlightQuery, FlightResponse } from "./types/Flight";
 
+type AppStep = "search" | "edit" | "success";
+
 function App() {
-	const [state, setState] = React.useState<"search" | "edit" | "success">(
-		"search"
-	);
+	const [step, setStep] = React.useState<AppStep>("search");
+
+	const [showError, setShowError] = React.useState(false);
 
 	// MOCK: temporary save user query to merge with mock
 	const [userQuery, setUserQuery] = React.useState<FlightQuery>();
@@ -22,8 +26,12 @@ function App() {
 		{ isLoading: isLoadingSearch, data: searchData },
 	] = useMutation(FlightService.search, {
 		onSuccess(_data, query) {
-			setState("edit");
+			setStep("edit");
 			setUserQuery(query);
+		},
+		onError() {
+			// handle error analytics
+			setShowError(true);
 		},
 	});
 
@@ -31,12 +39,18 @@ function App() {
 		FlightService.confirm,
 		{
 			onSuccess() {
-				setState("success");
+				setStep("success");
+			},
+			onError() {
+				// handle error analytics
+				setShowError(true);
 			},
 		}
 	);
 
-	const onReset = React.useCallback(() => setState("search"), []);
+	const onReset = React.useCallback(() => setStep("search"), []);
+
+	const onDismissError = React.useCallback(() => setShowError(false), []);
 
 	// MOCK: merge mock server with user query
 	const userInfo: FlightResponse | undefined = React.useMemo(
@@ -49,20 +63,30 @@ function App() {
 
 	return (
 		<MainTemplate>
-			{state === "search" && (
+			{step === "search" && (
 				<SearchFlight
 					onSubmitSearch={onSearch}
 					isLoading={isLoadingSearch}
 				/>
 			)}
-			{state === "edit" && userInfo?.flight && (
+			{step === "edit" && userInfo?.flight && (
 				<UserInfo
 					user={userInfo}
 					onSubmitConfimation={onConfirm}
 					isLoading={isLoadingConfirm}
 				/>
 			)}
-			{state === "success" && <Success onReset={onReset} />}
+			{step === "success" && <Success onReset={onReset} />}
+			<Snackbar
+				open={showError}
+				autoHideDuration={10000}
+				anchorOrigin={{ vertical: "top", horizontal: "center" }}
+				onClose={onDismissError}
+			>
+				<Alert severity="error" onClose={onDismissError}>
+					Woops, there was an error! Our team will handle that!
+				</Alert>
+			</Snackbar>
 		</MainTemplate>
 	);
 }
