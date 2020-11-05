@@ -1,0 +1,35 @@
+{
+	"extends": [
+		"react-app",
+		"prettier",
+		"prettier/@typescript-eslint",
+		"prettier/react"
+	],
+	"plugins": ["prettier", "simple-import-sort"],
+	"rules": {
+		"prettier/prettier": "error",
+		"sort-imports": "off",
+		"simple-import-sort/sort": "error"
+	},
+	"overrides": [
+		{
+			"files": ["*.tsx", "*.jsx"],
+			"rules": {
+				"simple-import-sort/sort": [
+					"error",
+					{
+						"groups": [["^react", "^@?\\w"]]
+					}
+				]
+			}
+		}
+	],
+	"settings": {
+		"import/resolver": {
+			"node": {
+				"extensions": [".js", ".jsx", ".ts", ".tsx"],
+				"paths": ["src"]
+			}
+		}
+	}
+}
