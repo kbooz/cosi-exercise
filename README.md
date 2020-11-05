@@ -95,6 +95,10 @@ For testing uses the out-of-the-box testing library [React Testing Library](http
 
 For code linting and formatting in the development, it utilizes the out-of-the-box dependency [ESLint](https://eslint.org/) for linting, [Prettier](https://prettier.io/) and [Editorconfig](https://editorconfig.org/) for styling and formmating
 
+## Todo
+
+-   Implement [Material-UI's Tree Shaking](https://material-ui.com/guides/minimizing-bundle-size/) for reducing bundle size
+
 ## Contact
 
 Feel free to get in touch with me via [Twitter](https://twitter.com/kbooz) or create an issue!
