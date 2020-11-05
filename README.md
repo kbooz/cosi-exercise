@@ -23,10 +23,11 @@ npm i
 Create a `.env` file in the root of the project with the following structure:
 
 ```sh
-REACT_APP_TOKEN=TOKEN
+REACT_APP_API_URL=
+REACT_APP_TOKEN=
 ```
 
-The token will be sent to the recruiter's email
+The content will be sent to the recruiter's email
 
 ### Configuring code editor
 

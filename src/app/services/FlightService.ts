@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { FlightQuery, FlightResponse } from "../types/Flight";
 
-const API_URL = "https://87d46870-87bf-4558-8b7f-ed6ce1b3c94d.mock.pstmn.io";
+const API_URL = process.env.REACT_APP_API_URL;
 
 export const flightUrls = {
 	search: `${API_URL}/search`,
