@@ -7,16 +7,16 @@
 	],
 	"plugins": ["prettier", "simple-import-sort"],
 	"rules": {
-		"prettier/prettier": "error",
+		"prettier/prettier": "warn",
 		"sort-imports": "off",
-		"simple-import-sort/sort": "error"
+		"simple-import-sort/sort": "warn"
 	},
 	"overrides": [
 		{
 			"files": ["*.tsx", "*.jsx"],
 			"rules": {
 				"simple-import-sort/sort": [
-					"error",
+					"warn",
 					{
 						"groups": [["^react", "^@?\\w"]]
 					}

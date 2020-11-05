@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Typography, Button, Grid } from "@material-ui/core";
+import { Box, Button, Grid, Typography } from "@material-ui/core";
 
 interface SuccessProps {
 	onReset: () => void;
