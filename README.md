@@ -32,7 +32,7 @@ The token will be sent to the recruiter's email
 
 If you're using [Visual Studio Code](https://code.visualstudio.com/), please install the recommended extensions.
 
-It is also enabled by default
+It is also enabled by default project-wise linting fix and formmating on save.
 
 If you're using another editor, it's recommended to install any [ESLint](https://eslint.org/), [Prettier](https://prettier.io/) and [EditorConfig](https://editorconfig.org/) plugins on your preferable code editor for linting and formmating
 
