@@ -86,6 +86,7 @@ Your app is ready to be deployed!
 
 As said before, the project was created using [Create React App](https://github.com/facebook/create-react-app) with [Typescript](typescriptlang.org/), and utilizes the following dependencies:
 
+-   [Material-Ui core and lab](https://material-ui.com) - components libraries
 -   [Formik](https://formik.org/) - for handling form states
 -   [Yup](https://github.com/jquense/yup) - for providing schema validation for Formik
 -   [Axios](https://github.com/axios/axios) - for handling API requests
