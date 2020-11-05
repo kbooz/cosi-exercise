@@ -70,16 +70,16 @@ Your app is ready to be deployed!
 ├── public
 ├── src
 │   ├── app
-│   │   ├── index.tsx			- Main screen
-│   │   ├── components			- Reusable components
-│   │   ├── routes				- Internal routes
+│   │   ├── index.tsx           - Main screen
+│   │   ├── components          - Reusable components
+│   │   ├── routes              - Internal routes
 │   │   │   ├── SearchFlight
 │   │   │   ├── Success
 │   │   │   └── UserInfo
-│   │   ├── services			- API Services
-│   │   └── types				- Reusable Typings
-│   └── index.tsx				- Root React file
-└── .vscode						- VSCode related configurations
+│   │   ├── services            - API Services
+│   │   └── types               - Reusable Typings
+│   └── index.tsx               - Root React file
+└── .vscode                     - VSCode related configurations
 ```
 
 ## Dependencies
