@@ -28,6 +28,7 @@ describe("User Info form", () => {
 			firstName: "Lucas",
 		};
 		render(<UserInfo user={user} />);
+		// eslint-disable-next-line no-useless-escape
 		expect(screen.getByText(/\#FLIGHT/)).toBeTruthy();
 		expect(screen.getByTestId("lastName")).toHaveValue(user.lastName);
 		expect(screen.getByTestId("firstName")).toHaveValue(user.firstName);
