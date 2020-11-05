@@ -1,5 +1,6 @@
 import * as React from "react";
 import { render, screen } from "@testing-library/react";
+
 import UserInfoExtra from "./UserInfo.extra";
 
 describe("User Info Form extra fields", () => {

@@ -1,9 +1,10 @@
 import * as React from "react";
 import ReactDOM from "react-dom";
+import { QueryCache, ReactQueryCacheProvider } from "react-query";
+
 import "./index.css";
 import App from "./app";
 import reportWebVitals from "./reportWebVitals";
-import { QueryCache, ReactQueryCacheProvider } from "react-query";
 
 const queryCache = new QueryCache();
 

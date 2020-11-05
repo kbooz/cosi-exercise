@@ -1,10 +1,11 @@
 import axios from "axios";
+
 import { FlightQuery, FlightResponse } from "../types/Flight";
 
 export const flightUrls = {
 	search: "https://app.fakejson.com/q/pb22iDJa",
-	confirm: "https://api.mocki.io/v1/7ec46dac"
-}
+	confirm: "https://api.mocki.io/v1/7ec46dac",
+};
 
 const FlightService = {
 	search(searchData: FlightQuery) {
@@ -14,8 +15,8 @@ const FlightService = {
 		});
 	},
 	confirm(data: any) {
-		return axios.post(flightUrls.confirm, data)
-	}
-}
+		return axios.post(flightUrls.confirm, data);
+	},
+};
 
 export default FlightService;

@@ -1,11 +1,10 @@
 import * as React from "react";
-
 import { useMutation } from "react-query";
 
 import MainTemplate from "./components/templates/MainTemplate";
 import SearchFlight from "./routes/SearchFlight/SearchFlight";
-import UserInfo from "./routes/UserInfo/UserInfo";
 import Success from "./routes/Success/Success";
+import UserInfo from "./routes/UserInfo/UserInfo";
 import FlightService from "./services/FlightService";
 
 function App() {

@@ -1,5 +1,6 @@
 import React from "react";
-import { TextField, Typography, Grid, Box } from "@material-ui/core";
+import { Box, Grid, TextField, Typography } from "@material-ui/core";
+
 import { ExtraInfo } from "./UserInfo.data";
 
 interface UserInfoExtraProps {

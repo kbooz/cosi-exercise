@@ -1,5 +1,6 @@
 import * as React from "react";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+
 import UserInfo from "./UserInfo";
 
 const user = {

@@ -1,7 +1,5 @@
 import * as React from "react";
-
-import { Container, AppBar, Toolbar, Typography, Box } from "@material-ui/core";
-
+import { AppBar, Box, Container, Toolbar, Typography } from "@material-ui/core";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
