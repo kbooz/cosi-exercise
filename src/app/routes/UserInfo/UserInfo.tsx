@@ -14,6 +14,7 @@ import {
 } from "@material-ui/core";
 import { useFormik } from "formik";
 
+import "./UserInfo.css";
 import { FlightResponse } from "../../types/Flight";
 import { countries, renderExtraInfo } from "./UserInfo.data";
 import UserInfoExtra from "./UserInfo.extra";
@@ -60,7 +61,11 @@ function UserInfo({ user, onSubmitConfimation, isLoading }: UserInfoProps) {
 	]);
 
 	return (
-		<Grid container spacing={4}>
+		<Grid
+			container
+			spacing={4}
+			className={isConfirming && "form-confirming"}
+		>
 			<Grid item xs={12}>
 				<Typography variant="h6" data-testid="flight">
 					Flight #{user.flight.toUpperCase()}
@@ -83,9 +88,8 @@ function UserInfo({ user, onSubmitConfimation, isLoading }: UserInfoProps) {
 								inputProps={{
 									"data-testid": "firstName",
 								}}
-								onChange={
-									!isConfirming ? handleChange : undefined
-								}
+								disabled={isConfirming}
+								onChange={handleChange}
 								value={values.firstName}
 								error={!!errors.firstName}
 								helperText={errors.firstName}
@@ -101,9 +105,8 @@ function UserInfo({ user, onSubmitConfimation, isLoading }: UserInfoProps) {
 								inputProps={{
 									"data-testid": "lastName",
 								}}
-								onChange={
-									!isConfirming ? handleChange : undefined
-								}
+								disabled={isConfirming}
+								onChange={handleChange}
 								value={values.lastName}
 								error={!!errors.lastName}
 								helperText={errors.lastName}
@@ -119,9 +122,8 @@ function UserInfo({ user, onSubmitConfimation, isLoading }: UserInfoProps) {
 									native
 									value={values.nationality}
 									label="Nationality"
-									onChange={
-										!isConfirming ? handleChange : undefined
-									}
+									disabled={isConfirming}
+									onChange={handleChange}
 									id="nationality"
 									inputProps={{
 										"data-testid": "nationality",
@@ -159,9 +161,8 @@ function UserInfo({ user, onSubmitConfimation, isLoading }: UserInfoProps) {
 								inputProps={{
 									"data-testid": "email",
 								}}
-								onChange={
-									!isConfirming ? handleChange : undefined
-								}
+								disabled={isConfirming}
+								onChange={handleChange}
 								value={values.email}
 								error={!!errors.email}
 								helperText={errors.email}
@@ -177,9 +178,8 @@ function UserInfo({ user, onSubmitConfimation, isLoading }: UserInfoProps) {
 								inputProps={{
 									"data-testid": "phone",
 								}}
-								onChange={
-									!isConfirming ? handleChange : undefined
-								}
+								disabled={isConfirming}
+								onChange={handleChange}
 								value={values.phone}
 								error={!!errors.phone}
 								helperText={errors.phone}
@@ -195,9 +195,8 @@ function UserInfo({ user, onSubmitConfimation, isLoading }: UserInfoProps) {
 								inputProps={{
 									"data-testid": "passport",
 								}}
-								onChange={
-									!isConfirming ? handleChange : undefined
-								}
+								disabled={isConfirming}
+								onChange={handleChange}
 								value={values.passport}
 								error={!!errors.passport}
 								helperText={errors.passport}

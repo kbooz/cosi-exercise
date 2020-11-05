@@ -1,0 +1,7 @@
+/*
+*	Doesn't explicity style as disabled when
+*	the form is confirming
+*/
+.form-confirming .MuiInputBase-root.Mui-disabled {
+	color: rgba(0, 0, 0, 0.87);
+}
